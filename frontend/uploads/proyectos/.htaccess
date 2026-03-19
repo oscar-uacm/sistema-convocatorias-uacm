@@ -1,0 +1,22 @@
+# 1. Evitar que la gente vea la lista de archivos de la carpeta
+Options -Indexes
+
+# 2. Apagar el motor de PHP en esta carpeta (Evita que se ejecuten virus o scripts)
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+
+# 3. Forzar a que los archivos se descarguen (opcional pero recomendado por seguridad)
+<FilesMatch "\.(pdf|docx|xlsx)$">
+    ForceType application/octet-stream
+    Header set Content-Disposition attachment
+</FilesMatch>
+
+# 4. Bloquear cualquier archivo que no sea PDF, Word o Excel
+<FilesMatch "(?i)\.(php|phtml|exe|sh|js|html)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

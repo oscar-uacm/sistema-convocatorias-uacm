@@ -1,0 +1,5 @@
+# Tamaño máximo por cada archivo individual
+php_value upload_max_filesize 25M
+
+# Tamaño máximo de todo el formulario junto (3 archivos de 20MB = 60MB + margen)
+php_value post_max_size 70M

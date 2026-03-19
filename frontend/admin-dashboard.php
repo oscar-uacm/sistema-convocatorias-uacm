@@ -24,8 +24,17 @@ $aprobados = mysqli_fetch_assoc($resAprobados)['total'];
     <meta charset="utf-8" />
     <title>UACM - Administración</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { "primary": "#701705" }
+                }
+            }
+        }
+    </script>
 </head>
 <body class="bg-[#fcfaf9] font-['Lexend'] flex">
     
@@ -34,7 +43,7 @@ $aprobados = mysqli_fetch_assoc($resAprobados)['total'];
     <main class="flex-1 p-8">
         <header class="mb-10">
             <h1 class="text-2xl font-black text-gray-800 uppercase tracking-tighter">Panel de Control Administrativo</h1>
-            <p class="text-sm text-gray-500">Gestión de la convocatoria vigente 2026</p>
+            <p class="text-sm text-gray-500">Gestión de la plataforma general</p>
         </header>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
@@ -61,10 +70,16 @@ $aprobados = mysqli_fetch_assoc($resAprobados)['total'];
             </h3>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <a href="admin-proyectos.php" class="bg-white p-4 rounded-xl text-center shadow-sm hover:shadow-md transition-all">
+                    <span class="material-symbols-outlined text-gray-400 mb-2 block">folder_open</span>
                     <p class="text-[10px] font-bold uppercase text-gray-600">Revisar Proyectos</p>
                 </a>
                 <a href="admin-usuarios.php" class="bg-white p-4 rounded-xl text-center shadow-sm hover:shadow-md transition-all">
-                    <p class="text-[10px] font-bold uppercase text-gray-600">Investigadores</p>
+                    <span class="material-symbols-outlined text-gray-400 mb-2 block">group</span>
+                    <p class="text-[10px] font-bold uppercase text-gray-600">Gestión Usuarios</p>
+                </a>
+                <a href="admin-convocatorias.php" class="bg-white p-4 rounded-xl text-center shadow-sm hover:shadow-md transition-all border-2 border-primary/20 bg-primary/5">
+                    <span class="material-symbols-outlined text-primary mb-2 block text-3xl">campaign</span>
+                    <p class="text-[10px] font-black uppercase text-primary tracking-widest">Convocatorias</p>
                 </a>
             </div>
         </div>

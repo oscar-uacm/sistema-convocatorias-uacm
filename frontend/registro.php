@@ -4,6 +4,13 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
 }
+
+// === NUEVO: CAPTURAR LA CONVOCATORIA Y GUARDARLA EN SESIÓN ===
+if (isset($_GET['conv_id'])) {
+    $_SESSION['conv_id'] = intval($_GET['conv_id']);
+}
+// ==============================================================
+
 $datos = $_SESSION['proyecto_paso1'] ?? [];
 $nombre_investigador = $_SESSION['nombre'];
 ?>
@@ -28,63 +35,64 @@ $nombre_investigador = $_SESSION['nombre'];
         }
     </script>
 </head>
-<body class="bg-background-light font-display text-slate-900">
+<body class="bg-background-light font-display text-slate-800">
+    <header class="bg-white border-b border-slate-200 px-8 py-4 flex items-center justify-between sticky top-0 z-50">
+        <div class="flex items-center gap-4">
+            <div class="size-10 bg-primary text-white flex items-center justify-center rounded-xl shadow-lg">
+                <span class="material-symbols-outlined">school</span>
+            </div>
+            <div>
+                <h2 class="font-bold text-slate-800 leading-tight">Registro de Proyecto</h2>
+                <p class="text-[10px] font-black uppercase tracking-widest text-primary">Paso 1 de 5</p>
+            </div>
+        </div>
+        <div class="text-right hidden sm:block">
+            <p class="text-xs font-bold text-slate-400 uppercase">Investigador</p>
+            <p class="text-sm font-bold text-primary"><?php echo htmlspecialchars($nombre_investigador); ?></p>
+        </div>
+    </header>
+
     <main class="max-w-4xl mx-auto px-6 py-12">
-        
-        <div class="mb-8">
-            <a href="index.php" class="inline-flex items-center gap-2 text-xs font-bold text-gray-400 hover:text-primary transition-colors uppercase tracking-widest">
-                <span class="material-symbols-outlined text-sm">home</span>
-                Abandonar registro y volver al inicio
-            </a>
+        <div class="mb-10 text-center">
+            <h1 class="text-3xl font-black text-slate-900 mb-4 tracking-tight">Datos Generales</h1>
+            <p class="text-slate-500 font-medium">Comencemos con la información básica de tu propuesta de investigación.</p>
         </div>
 
-        <div class="bg-white rounded-[2.5rem] shadow-xl shadow-primary/5 overflow-hidden border border-primary/10">
-            <div class="bg-primary p-8 text-white">
-                <div class="flex justify-between items-center">
+        <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+            <div class="p-8 sm:p-10">
+                <form action="procesar-paso1.php" method="POST" class="space-y-8">
+                    
                     <div>
-                        <p class="text-white/60 text-[10px] uppercase font-bold tracking-[0.2em] mb-1">Nueva Propuesta 2026</p>
-                        <h1 class="text-2xl font-black">Paso 1: Datos Generales</h1>
+                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Título del Proyecto</label>
+                        <input type="text" name="titulo" required value="<?php echo htmlspecialchars($datos['titulo'] ?? ''); ?>"
+                            class="w-full bg-background-light border-2 border-[#e9d2ce] rounded-2xl px-5 py-4 focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all font-bold text-slate-800" 
+                            placeholder="Ej. Análisis de..." />
                     </div>
-                    <span class="text-4xl font-black opacity-20 italic text-white">01</span>
-                </div>
-            </div>
 
-            <div class="p-8 md:p-12">
-                <form action="procesar-paso1.php" method="POST">
-                    <div class="space-y-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
-                            <label class="block text-xs font-bold text-primary uppercase tracking-widest mb-3">Título del Proyecto</label>
-                            <input type="text" name="titulo" required value="<?php echo htmlspecialchars($datos['titulo'] ?? ''); ?>"
-                                class="w-full bg-background-light dark:bg-zinc-800 border-2 border-[#e9d2ce] rounded-2xl px-5 py-4 focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all font-medium" 
-                                placeholder="Escriba el nombre completo de la investigación">
+                            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Área de Conocimiento</label>
+                            <select name="area" required class="w-full bg-background-light border-2 border-[#e9d2ce] rounded-2xl px-5 py-4 focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all font-bold text-slate-700">
+                                <option value="">Seleccione un área...</option>
+                                <option value="Ciencias y Humanidades" <?php echo (isset($datos['area']) && $datos['area'] == 'Ciencias y Humanidades') ? 'selected' : ''; ?>>Ciencias y Humanidades</option>
+                                <option value="Ciencias y Tecnología" <?php echo (isset($datos['area']) && $datos['area'] == 'Ciencias y Tecnología') ? 'selected' : ''; ?>>Ciencias y Tecnología</option>
+                                <option value="Ciencias Sociales" <?php echo (isset($datos['area']) && $datos['area'] == 'Ciencias Sociales') ? 'selected' : ''; ?>>Ciencias Sociales</option>
+                                <option value="Artes y Letras" <?php echo (isset($datos['area']) && $datos['area'] == 'Artes y Letras') ? 'selected' : ''; ?>>Artes y Letras</option>
+                            </select>
                         </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-xs font-bold text-primary uppercase tracking-widest mb-3">Área de Conocimiento</label>
-                                <select name="area" required class="w-full bg-background-light border-2 border-[#e9d2ce] rounded-2xl px-5 py-4 focus:border-primary transition-all font-medium">
-                                    <option value="" disabled <?php echo !isset($datos['area']) ? 'selected' : ''; ?>>Seleccione área...</option>
-                                    <option value="Ciencias Exactas" <?php echo ($datos['area'] ?? '') == 'Ciencias Exactas' ? 'selected' : ''; ?>>Ciencias Exactas</option>
-                                    <option value="Humanidades" <?php echo ($datos['area'] ?? '') == 'Humanidades' ? 'selected' : ''; ?>>Humanidades</option>
-                                    <option value="Tecnología" <?php echo ($datos['area'] ?? '') == 'Tecnología' ? 'selected' : ''; ?>>Tecnología</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-primary uppercase tracking-widest mb-3">Duración Estimada</label>
-                                <select name="duracion" required class="w-full bg-background-light border-2 border-[#e9d2ce] rounded-2xl px-5 py-4 focus:border-primary transition-all font-medium">
-                                    <option value="6 meses" <?php echo ($datos['duracion'] ?? '') == '6 meses' ? 'selected' : ''; ?>>6 Meses</option>
-                                    <option value="12 meses" <?php echo ($datos['duracion'] ?? '') == '12 meses' ? 'selected' : ''; ?>>12 Meses</option>
-                                    <option value="24 meses" <?php echo ($datos['duracion'] ?? '') == '24 meses' ? 'selected' : ''; ?>>24 Meses</option>
-                                </select>
-                            </div>
-                        </div>
-
                         <div>
-                            <label class="block text-xs font-bold text-primary uppercase tracking-widest mb-3">Resumen del Proyecto</label>
-                            <textarea name="resumen" required rows="6"
-                                class="w-full bg-background-light border-2 border-[#e9d2ce] rounded-2xl px-5 py-4 focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all font-medium leading-relaxed" 
-                                placeholder="Describa los objetivos y alcances..."><?php echo htmlspecialchars($datos['resumen'] ?? ''); ?></textarea>
+                            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Duración (Meses)</label>
+                            <input type="number" name="duracion" required min="1" max="48" value="<?php echo htmlspecialchars($datos['duracion'] ?? ''); ?>"
+                                class="w-full bg-background-light border-2 border-[#e9d2ce] rounded-2xl px-5 py-4 focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all font-bold text-slate-800" 
+                                placeholder="Ej. 12" />
                         </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Resumen del Proyecto</label>
+                        <textarea name="resumen" required rows="6"
+                            class="w-full bg-background-light border-2 border-[#e9d2ce] rounded-2xl px-5 py-4 focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all font-medium leading-relaxed resize-none" 
+                            placeholder="Describa los objetivos y alcances..."><?php echo htmlspecialchars($datos['resumen'] ?? ''); ?></textarea>
                     </div>
 
                     <div class="mt-12 flex flex-col sm:flex-row justify-end gap-4 border-t border-[#e9d2ce] pt-8">
