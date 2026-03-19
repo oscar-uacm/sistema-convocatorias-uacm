@@ -1,6 +1,11 @@
 # Ignorar dependencias pesadas de Node.js
 node_modules/
 
+# Ignorar la base de datos de Docker (¡ESTO ES LO NUEVO!)
+backend/
+mysql/
+db/
+
 # Ignorar archivos subidos por los usuarios (pero mantener las carpetas)
 uploads/proyectos/*
 uploads/convocatorias/*
@@ -11,5 +16,5 @@ uploads/convocatorias/*
 .DS_Store
 Thumbs.db
 
-# Ignorar archivos de seguridad o de prueba que no deben hacerse públicos
+# Ignorar archivos de seguridad o de prueba
 recuperar-password.php

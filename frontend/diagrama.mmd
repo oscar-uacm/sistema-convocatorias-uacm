@@ -1,0 +1,40 @@
+graph TD
+    %% Estilos
+    classDef public fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    classDef user fill:#e1f5fe,stroke:#0277bd,stroke-width:2px;
+    classDef process fill:#fff3e0,stroke:#e65100,stroke-width:1px,stroke-dasharray: 5 5;
+    classDef admin fill:#fce4ec,stroke:#c2185b,stroke-width:2px;
+
+    %% Área Pública
+    Index[index.php<br/>Inicio]:::public --> Login[login.php]:::public
+    Index --> RegUser[registro-usuario.php<br/>Crear Cuenta]:::public
+    RegUser --> ProcReg(procesar_registro.php):::process --> Login
+    Login -.-> RecPass[recuperar-password.php]:::public
+
+    %% Bifurcación de Sesión
+    Login -- "Usuario Normal" --> Dashboard[dashboard.php]:::user
+    Login -- "Administrador" --> AdminDash[admin-dashboard.php]:::admin
+
+    %% Flujo de Usuario - Asistente de Proyecto
+    Dashboard --> Paso1[registro.php<br/>Paso 1: Datos Básicos]:::user
+    Paso1 --> Proc1(procesar-paso1.php):::process --> Paso2[registro-paso2.php<br/>Paso 2: Detalles]:::user
+    Paso2 --> Proc2(procesar-paso2.php):::process --> Paso3[registro-paso3.php<br/>Paso 3: Archivos/Cronograma]:::user
+    Paso3 --> Proc3(procesar-paso3.php):::process --> Paso4[registro-paso4.php<br/>Paso 4: Resumen]:::user
+    Paso4 --> Finalizar(finalizar-registro.php):::process --> Exito[registro-exito.php]:::user
+    Exito --> Dashboard
+
+    %% Utilidades Usuario
+    Dashboard --> Util1[convocatoria.php]:::user
+    Dashboard --> Util2[faq.php]:::user
+    Dashboard --> Util3[guias-usuario.php]:::user
+    Dashboard --> Util4(generar-pdf.php):::process
+
+    %% Flujo de Administrador
+    AdminDash --> AdminUsers[admin-usuarios.php<br/>Gestión de Usuarios]:::admin
+    AdminDash --> AdminProjs[admin-proyectos.php<br/>Todos los Proyectos]:::admin
+    AdminDash --> AdminEval[admin-evaluacion.php<br/>Evaluar Proyecto]:::admin
+    AdminEval --> GuardarEval(guardar-evaluacion.php):::process --> AdminProjs
+    
+    %% Extras
+    Dashboard -.-> Logout[logout.php]
+    AdminDash -.-> Logout

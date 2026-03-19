@@ -1,0 +1,27 @@
+services:
+  # Servidor Web (Frontend + Lógica)
+  web:
+    build: .
+    # image: php:8.2-apache  
+    container_name: servidor_convocatoria
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend:/var/www/html
+    depends_on:
+      - db
+
+  # Base de Datos
+  db:
+    image: mysql:8.0
+    container_name: bd_convocatoria
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password_maestro
+      MYSQL_DATABASE: sistema_proyectos
+      MYSQL_USER: user_admin
+      MYSQL_PASSWORD: user_password
+    volumes:
+      - ./backend:/var/lib/mysql
+    ports:
+      - "3306:3306"
