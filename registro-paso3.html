@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>UACM Wizard Step 3: Budget &amp; Timeline</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#701705",
+                        "secondary-red": "#9C2007",
+                        "background-light": "#f8f6f5",
+                        "background-dark": "#221310",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+
+        .timeline-checkbox:checked {
+            background-color: #701705;
+            border-color: #701705;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-[#1c0f0d] min-h-screen">
+    <div class="layout-container flex h-full grow flex-col">
+        <!-- Top Navigation Bar -->
+        <header
+            class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/10 bg-white dark:bg-background-dark px-10 py-3 sticky top-0 z-50">
+            <div class="flex items-center gap-4 text-primary">
+                <div class="size-6">
+                    <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M24 4C25.7818 14.2173 33.7827 22.2182 44 24C33.7827 25.7818 25.7818 33.7827 24 44C22.2182 33.7827 14.2173 25.7818 4 24C14.2173 22.2182 22.2182 14.2173 24 4Z"
+                            fill="currentColor"></path>
+                    </svg>
+                </div>
+                <h2 class="text-primary text-xl font-bold leading-tight tracking-[-0.015em]">UACM CCH</h2>
+            </div>
+            <div class="flex flex-1 justify-end gap-8 items-center">
+                <nav class="hidden md:flex items-center gap-9">
+                    <a class="text-[#1c0f0d] dark:text-white text-sm font-medium hover:text-primary transition-colors"
+                        href="#">Proyectos</a>
+                    <a class="text-[#1c0f0d] dark:text-white text-sm font-medium hover:text-primary transition-colors"
+                        href="#">Convocatorias</a>
+                    <a class="text-[#1c0f0d] dark:text-white text-sm font-medium hover:text-primary transition-colors"
+                        href="#">Ayuda</a>
+                </nav>
+                <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20"
+                    data-alt="User profile avatar placeholder"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD6quwMk0OTe-tLFC8eqUSwZZilndfA4hy0jdHNlby4Xxv9GaVkEvA2gJDDpcv84Lc3CLb9rDhwEC1gpHaWEd9VEFpwFJ0AfTZtBGZnZoBC8oKpkDzrHdyXTefwg2a9yXoCbzTCe-dm_Slk5katTsZK2Sv25_9XbiF0J2kCriGE6BXDZq2shULj2JQcGEvSru0OfRK1fCKi2dlmU_-Lx10q2pFPuzoYJW0bYPKr4LpNAkbE1XzSeItyyI3B0hxrTU8QzTytZmxAihgE");'>
+                </div>
+            </div>
+        </header>
+        <main class="flex flex-1 justify-center py-8 px-4 md:px-20 lg:px-40">
+            <div class="layout-content-container flex flex-col max-w-[1024px] flex-1 gap-8">
+                <!-- Progress Stepper -->
+                <div class="bg-white dark:bg-background-dark/50 p-6 rounded-xl shadow-sm border border-primary/5">
+                    <div class="flex gap-6 justify-between items-end mb-3">
+                        <div>
+                            <p class="text-primary text-sm font-bold uppercase tracking-wider">Paso 3 de 4</p>
+                            <h1 class="text-[#1c0f0d] dark:text-white text-3xl font-black leading-tight tracking-tight">
+                                Presupuesto y Cronograma</h1>
+                        </div>
+                        <p class="text-primary text-lg font-bold">75%</p>
+                    </div>
+                    <div class="rounded-full bg-primary/10 h-3 overflow-hidden">
+                        <div class="h-full rounded-full bg-primary transition-all duration-500" style="width: 75%;">
+                        </div>
+                    </div>
+                    <p class="text-secondary-red text-sm font-medium mt-3 italic">
+                        Complete la información financiera y el plan de trabajo detallado para el Colegio de Ciencias y
+                        Humanidades.
+                    </p>
+                </div>
+                <!-- Section A: Budget Table -->
+                <section
+                    class="bg-white dark:bg-background-dark/50 rounded-xl shadow-sm border border-primary/5 overflow-hidden">
+                    <div class="p-6 border-b border-primary/5 flex justify-between items-center">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-secondary-red">payments</span>
+                            <h2 class="text-[#1c0f0d] dark:text-white text-xl font-bold">A. Presupuesto Detallado</h2>
+                        </div>
+                        <button
+                            class="flex items-center gap-2 text-sm font-bold text-primary hover:bg-primary/5 px-3 py-2 rounded-lg transition-all">
+                            <span class="material-symbols-outlined text-lg">add_circle</span>
+                            Agregar Fila
+                        </button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-primary/5 text-primary text-sm font-semibold">
+                                    <th class="px-6 py-4 w-1/3">Concepto</th>
+                                    <th class="px-6 py-4 w-1/4">Monto ($)</th>
+                                    <th class="px-6 py-4">Justificación</th>
+                                    <th class="px-6 py-4 w-20 text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-primary/5">
+                                <tr class="hover:bg-primary/5 transition-colors">
+                                    <td class="px-6 py-4">
+                                        <input class="w-full bg-transparent border-none focus:ring-0 text-sm"
+                                            placeholder="Ej. Honorarios" type="text" value="Honorarios" />
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="relative">
+                                            <span
+                                                class="absolute left-0 top-1/2 -translate-y-1/2 text-gray-400 text-sm">$</span>
+                                            <input class="w-full bg-transparent border-none focus:ring-0 text-sm pl-4"
+                                                placeholder="0.00" type="number" value="5000" />
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <input class="w-full bg-transparent border-none focus:ring-0 text-sm"
+                                            placeholder="Breve descripción..." type="text"
+                                            value="Pago a investigadores externos" />
+                                    </td>
+                                    <td class="px-6 py-4 text-center">
+                                        <button class="text-secondary-red hover:text-primary transition-colors">
+                                            <span class="material-symbols-outlined">delete</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-primary/5 transition-colors">
+                                    <td class="px-6 py-4">
+                                        <input class="w-full bg-transparent border-none focus:ring-0 text-sm"
+                                            placeholder="Ej. Materiales" type="text"
+                                            value="Materiales de Laboratorio" />
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="relative">
+                                            <span
+                                                class="absolute left-0 top-1/2 -translate-y-1/2 text-gray-400 text-sm">$</span>
+                                            <input class="w-full bg-transparent border-none focus:ring-0 text-sm pl-4"
+                                                placeholder="0.00" type="number" value="2000" />
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <input class="w-full bg-transparent border-none focus:ring-0 text-sm"
+                                            placeholder="Breve descripción..." type="text"
+                                            value="Reactivos y cristalería" />
+                                    </td>
+                                    <td class="px-6 py-4 text-center">
+                                        <button class="text-secondary-red hover:text-primary transition-colors">
+                                            <span class="material-symbols-outlined">delete</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr class="bg-primary/5 font-bold">
+                                    <td class="px-6 py-4 text-right text-primary uppercase text-xs tracking-widest"
+                                        colspan="1">Total Estimado:</td>
+                                    <td class="px-6 py-4 text-primary text-lg">$ 7,000.00</td>
+                                    <td colspan="2"></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </section>
+                <!-- Section B: Timeline -->
+                <section
+                    class="bg-white dark:bg-background-dark/50 rounded-xl shadow-sm border border-primary/5 overflow-hidden">
+                    <div class="p-6 border-b border-primary/5 flex justify-between items-center">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-secondary-red">calendar_month</span>
+                            <h2 class="text-[#1c0f0d] dark:text-white text-xl font-bold">B. Cronograma de Actividades
+                            </h2>
+                        </div>
+                        <button
+                            class="flex items-center gap-2 text-sm font-bold text-primary hover:bg-primary/5 px-3 py-2 rounded-lg transition-all">
+                            <span class="material-symbols-outlined text-lg">playlist_add</span>
+                            Agregar Actividad
+                        </button>
+                    </div>
+                    <div class="p-6 overflow-x-auto">
+                        <table class="w-full border-collapse">
+                            <thead>
+                                <tr>
+                                    <th
+                                        class="text-left py-3 px-4 text-sm font-semibold text-primary/70 uppercase tracking-wider">
+                                        Actividad</th>
+                                    <th
+                                        class="text-center py-3 px-2 text-xs font-bold text-primary bg-primary/5 rounded-t-lg">
+                                        Mes 1</th>
+                                    <th
+                                        class="text-center py-3 px-2 text-xs font-bold text-primary bg-primary/5 rounded-t-lg">
+                                        Mes 2</th>
+                                    <th
+                                        class="text-center py-3 px-2 text-xs font-bold text-primary bg-primary/5 rounded-t-lg">
+                                        Mes 3</th>
+                                    <th
+                                        class="text-center py-3 px-2 text-xs font-bold text-primary bg-primary/5 rounded-t-lg">
+                                        Mes 4</th>
+                                    <th
+                                        class="text-center py-3 px-2 text-xs font-bold text-primary bg-primary/5 rounded-t-lg">
+                                        Mes 5</th>
+                                    <th
+                                        class="text-center py-3 px-2 text-xs font-bold text-primary bg-primary/5 rounded-t-lg">
+                                        Mes 6</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-primary/5">
+                                <tr>
+                                    <td class="py-4 px-4">
+                                        <input
+                                            class="w-full bg-transparent border-b border-primary/10 focus:border-primary focus:ring-0 text-sm p-1"
+                                            type="text" value="Investigación Documental" />
+                                    </td>
+                                    <td class="text-center"><input checked=""
+                                            class="timeline-checkbox rounded text-primary focus:ring-primary h-5 w-5"
+                                            type="checkbox" /></td>
+                                    <td class="text-center"><input checked=""
+                                            class="timeline-checkbox rounded text-primary focus:ring-primary h-5 w-5"
+                                            type="checkbox" /></td>
+                                    <td class="text-center"><input
+                                            class="timeline-checkbox rounded text-primary focus:ring-primary h-5 w-5"
+                                            type="checkbox" /></td>
+                                    <td class="text-center"><input
+                                            class="timeline-checkbox rounded text-primary focus:ring-primary h-5 w-5"
+                                            type="checkbox" /></td>
+                                    <td class="text-center"><input
+                                            class="timeline-checkbox rounded text-primary focus:ring-primary h-5 w-5"
+                                            type="checkbox" /></td>
+                                    <td class="text-center"><input
+                                            class="timeline-checkbox rounded text-primary focus:ring-primary h-5 w-5"
+                                            type="checkbox" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-4">
+                                        <input
+                                            class="w-full bg-transparent border-b border-primary/10 focus:border-primary focus:ring-0 text-sm p-1"
+                                            type="text" value="Recolección de Datos en Campo" />
+                                    </td>
+                                    <td class="text-center"><input
+                                            class="timeline-checkbox rounded text-primary focus:ring-primary h-5 w-5"
+                                            type="checkbox" /></td>
+                                    <td class="text-center"><input checked=""
+                                            class="timeline-checkbox rounded text-primary focus:ring-primary h-5 w-5"
+                                            type="checkbox" /></td>
+                                    <td class="text-center"><input checked=""
+                                            class="timeline-checkbox rounded text-primary focus:ring-primary h-5 w-5"
+                                            type="checkbox" /></td>
+                                    <td class="text-center"><input checked=""
+                                            class="timeline-checkbox rounded text-primary focus:ring-primary h-5 w-5"
+                                            type="checkbox" /></td>
+                                    <td class="text-center"><input
+                                            class="timeline-checkbox rounded text-primary focus:ring-primary h-5 w-5"
+                                            type="checkbox" /></td>
+                                    <td class="text-center"><input
+                                            class="timeline-checkbox rounded text-primary focus:ring-primary h-5 w-5"
+                                            type="checkbox" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-4">
+                                        <input
+                                            class="w-full bg-transparent border-b border-primary/10 focus:border-primary focus:ring-0 text-sm p-1"
+                                            type="text" value="Análisis de Resultados" />
+                                    </td>
+                                    <td class="text-center"><input
+                                            class="timeline-checkbox rounded text-primary focus:ring-primary h-5 w-5"
+                                            type="checkbox" /></td>
+                                    <td class="text-center"><input
+                                            class="timeline-checkbox rounded text-primary focus:ring-primary h-5 w-5"
+                                            type="checkbox" /></td>
+                                    <td class="text-center"><input
+                                            class="timeline-checkbox rounded text-primary focus:ring-primary h-5 w-5"
+                                            type="checkbox" /></td>
+                                    <td class="text-center"><input
+                                            class="timeline-checkbox rounded text-primary focus:ring-primary h-5 w-5"
+                                            type="checkbox" /></td>
+                                    <td class="text-center"><input checked=""
+                                            class="timeline-checkbox rounded text-primary focus:ring-primary h-5 w-5"
+                                            type="checkbox" /></td>
+                                    <td class="text-center"><input checked=""
+                                            class="timeline-checkbox rounded text-primary focus:ring-primary h-5 w-5"
+                                            type="checkbox" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                <!-- Navigation Footer -->
+                <div class="flex items-center justify-between mt-4 pb-12">
+                    <a href="registro-paso2.html"
+                        class="flex items-center gap-2 px-8 py-3 rounded-lg border-2 border-primary text-primary font-bold hover:bg-primary/5 transition-all">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                        Anterior
+                    </a>
+                    <div class="flex items-center gap-4">
+                        <button class="hidden md:block text-secondary-red font-medium hover:underline px-4">Guardar
+                            Borrador</button>
+                        <a href="registro-paso4.html"
+                            class="flex items-center gap-2 px-10 py-3 rounded-lg bg-primary text-white font-bold shadow-lg shadow-primary/20 hover:bg-secondary-red transition-all">
+                            Siguiente
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- Help Button Floating -->
+        <button
+            class="fixed bottom-6 right-6 bg-secondary-red text-white p-4 rounded-full shadow-xl hover:scale-105 transition-transform flex items-center justify-center">
+            <span class="material-symbols-outlined">help_outline</span>
+        </button>
+    </div>
+    <div id="footer-root"></div>
+    <script src="assets/js/main.js"></script>`n</body>
+
+</html>
+
+
+

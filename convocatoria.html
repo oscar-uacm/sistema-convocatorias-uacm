@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>UACM - Documentación y Convocatorias</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#9c2007",
+            "primary-dark": "#701705",
+            "background-light": "#f8f6f5",
+            "background-dark": "#221310",
+            "neutral-subtle": "#f4e9e7",
+            "neutral-text": "#1c0f0d",
+            "neutral-muted": "#9d5648",
+          },
+          fontFamily: {
+            "display": ["Lexend", "sans-serif"]
+          },
+          borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+        },
+      },
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Lexend', sans-serif;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .sidebar-item-active {
+      background-color: #f4e9e7;
+      border-left: 4px solid #9c2007;
+    }
+
+    .btn-download {
+      background-color: #701705;
+      transition: all 0.3s ease;
+    }
+
+    .btn-download:hover {
+      background-color: white;
+      color: black;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-neutral-text font-display">
+  <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+    <!-- Header -->
+    <div id="header-root"></div>
+    <div class="flex flex-1 w-full max-w-[1440px] mx-auto">
+      <!-- Sidebar Navigation -->
+      <aside
+        class="w-80 border-r border-neutral-subtle bg-white hidden md:block overflow-y-auto h-[calc(100vh-73px)] sticky top-[73px]">
+        <div class="p-6">
+          <h3 class="text-neutral-muted text-xs font-bold uppercase tracking-widest mb-4">Portal de Proyectos</h3>
+          <nav class="space-y-1">
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg sidebar-item-active group" href="convocatoria.html">
+              <span class="material-symbols-outlined text-primary">description</span>
+              <span class="text-neutral-text text-sm font-semibold">Convocatoria 2026</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-neutral-subtle transition-colors group"
+              href="guias-usuario.html">
+              <span class="material-symbols-outlined text-neutral-muted group-hover:text-primary">menu_book</span>
+              <span class="text-neutral-text text-sm font-medium">Guías de Usuario</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-neutral-subtle transition-colors group"
+              href="#">
+              <span class="material-symbols-outlined text-neutral-muted group-hover:text-primary">cloud_download</span>
+              <span class="text-neutral-text text-sm font-medium">Formatos Descargables</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-neutral-subtle transition-colors group"
+              href="faq.html">
+              <span class="material-symbols-outlined text-neutral-muted group-hover:text-primary">help_outline</span>
+              <span class="text-neutral-text text-sm font-medium">Preguntas Frecuentes</span>
+            </a>
+            <div class="pt-6 mt-6 border-t border-neutral-subtle">
+              <h3 class="text-neutral-muted text-xs font-bold uppercase tracking-widest mb-4">Archivo Histórico</h3>
+              <a class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-neutral-subtle transition-colors group"
+                href="#">
+                <span class="material-symbols-outlined text-neutral-muted group-hover:text-primary">folder_open</span>
+                <span class="text-neutral-text text-sm font-medium">Convocatoria 2023</span>
+              </a>
+              <a class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-neutral-subtle transition-colors group"
+                href="#">
+                <span class="material-symbols-outlined text-neutral-muted group-hover:text-primary">folder_open</span>
+                <span class="text-neutral-text text-sm font-medium">Convocatoria 2022</span>
+              </a>
+            </div>
+          </nav>
+        </div>
+        <div class="p-6 mt-auto">
+          <div class="bg-primary/5 rounded-xl p-4 border border-primary/10">
+            <p class="text-xs text-primary font-bold mb-2 uppercase">¿Necesitas ayuda?</p>
+            <p class="text-sm text-neutral-text mb-3">Contáctanos para dudas técnicas sobre la plataforma.</p>
+            <a class="text-primary text-sm font-bold flex items-center gap-1 hover:underline"
+              href="mailto:soporte@uacm.edu.mx">
+              <span class="material-symbols-outlined text-sm">mail</span> soporte@uacm.edu.mx
+            </a>
+          </div>
+        </div>
+      </aside>
+      <!-- Main Content Area -->
+      <main class="flex-1 bg-white min-h-screen overflow-x-hidden">
+        <!-- Breadcrumbs & Hero -->
+        <div class="px-8 pt-8 pb-4">
+          <div class="flex items-center gap-2 text-neutral-muted text-xs font-medium mb-6">
+            <a class="hover:text-primary transition-colors" href="#">Inicio</a>
+            <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+            <a class="hover:text-primary transition-colors" href="#">Documentación</a>
+            <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+            <span class="text-neutral-text">Convocatoria 2026</span>
+          </div>
+          <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-neutral-subtle pb-8">
+            <div class="max-w-2xl">
+              <span
+                class="bg-primary/10 text-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-4 inline-block">Convocatoria
+                Abierta</span>
+              <h1 class="text-neutral-text text-4xl font-extrabold leading-tight tracking-tight mb-4">
+                Convocatoria de Proyectos de Investigación 2026
+              </h1>
+              <p class="text-neutral-muted text-lg font-light leading-relaxed">
+                Bases, requisitos institucionales y cronograma oficial de actividades para el ciclo académico vigente
+                del Colegio de Ciencias y Humanidades.
+              </p>
+            </div>
+            <div class="flex gap-3">
+              <a href="ConvocatoriaFinanciamiento/CONVOCATORIA%20INTERNA%20PARA%20EL%20FINANCIAMIENTO%20DE%20PROYECTOS%20DE%20INVESTIGACI%C3%93N%20DEL%20CCYH%202026%20FINAL.pdf"
+                target="_blank"
+                class="flex items-center gap-2 btn-download text-white px-6 py-3 rounded-lg font-bold text-sm shadow-lg shadow-primary/20">
+                <span class="material-symbols-outlined text-lg">picture_as_pdf</span>
+                Bases Completas (PDF)
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- Content Sections -->
+        <div class="px-8 py-10 max-w-5xl">
+          <!-- Important Dates Table -->
+          <section class="mb-12">
+            <div class="flex items-center gap-2 mb-6">
+              <span class="material-symbols-outlined text-primary">calendar_month</span>
+              <h2 class="text-2xl font-bold text-neutral-text">Cronograma Académico 2026</h2>
+            </div>
+            <div class="overflow-hidden rounded-xl border border-neutral-subtle shadow-sm">
+              <table class="w-full text-left border-collapse">
+                <thead class="bg-neutral-subtle">
+                  <tr>
+                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-neutral-muted">Actividad</th>
+                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-neutral-muted">Fecha Inicio
+                    </th>
+                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-neutral-muted">Fecha Cierre
+                    </th>
+                    <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-neutral-muted">Estado</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-neutral-subtle">
+                  <tr class="hover:bg-neutral-subtle/30 transition-colors">
+                    <td class="px-6 py-5 font-medium text-neutral-text">Publicación de Convocatoria</td>
+                    <td class="px-6 py-5 text-neutral-muted">15 de Enero</td>
+                    <td class="px-6 py-5 text-neutral-muted">-</td>
+                    <td class="px-6 py-5 text-green-600 font-bold text-sm">Completado</td>
+                  </tr>
+                  <tr class="bg-primary/5">
+                    <td class="px-6 py-5 font-bold text-neutral-text">Registro de Protocolos</td>
+                    <td class="px-6 py-5 text-neutral-text">01 de Febrero</td>
+                    <td class="px-6 py-5 text-neutral-text">31 de Marzo</td>
+                    <td class="px-6 py-5"><span
+                        class="bg-primary text-white text-[10px] px-2 py-1 rounded font-bold uppercase">En
+                        Proceso</span></td>
+                  </tr>
+                  <tr class="hover:bg-neutral-subtle/30 transition-colors">
+                    <td class="px-6 py-5 font-medium text-neutral-text">Evaluación por Pares</td>
+                    <td class="px-6 py-5 text-neutral-muted">15 de Abril</td>
+                    <td class="px-6 py-5 text-neutral-muted">30 de Mayo</td>
+                    <td class="px-6 py-5 text-neutral-muted text-sm italic">Pendiente</td>
+                  </tr>
+                  <tr class="hover:bg-neutral-subtle/30 transition-colors">
+                    <td class="px-6 py-5 font-medium text-neutral-text">Resultados Finales</td>
+                    <td class="px-6 py-5 text-neutral-muted">15 de Junio</td>
+                    <td class="px-6 py-5 text-neutral-muted">-</td>
+                    <td class="px-6 py-5 text-neutral-muted text-sm italic">Pendiente</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <!-- Rich Text Content -->
+          <article class="prose prose-neutral max-w-none mb-16 text-neutral-text">
+            <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">verified_user</span>
+              Requisitos de Participación
+            </h2>
+            <p class="leading-relaxed mb-6 text-neutral-muted">
+              Para ser considerados, los proyectos deberán alinearse a las líneas de investigación prioritarias del
+              Colegio y cumplir estrictamente con los siguientes puntos:
+            </p>
+            <ul class="space-y-4 mb-8">
+              <li class="flex items-start gap-4">
+                <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+                <div>
+                  <strong class="block">Personal Académico:</strong>
+                  <span>Podrán participar docentes e investigadores con contrato vigente en la UACM.</span>
+                </div>
+              </li>
+              <li class="flex items-start gap-4">
+                <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+                <div>
+                  <strong class="block">Estructura del Protocolo:</strong>
+                  <span>Debe incluir justificación, objetivos, metodología, cronograma y presupuesto detallado.</span>
+                </div>
+              </li>
+              <li class="flex items-start gap-4">
+                <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+                <div>
+                  <strong class="block">Impacto Social:</strong>
+                  <span>Los proyectos deberán demostrar un beneficio directo a la comunidad universitaria o al entorno
+                    social.</span>
+                </div>
+              </li>
+            </ul>
+            <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">folder_zip</span>
+              Documentación de Apoyo
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- 1. Glosario -->
+              <a href="ConvocatoriaFinanciamiento/GLOSARIO%20DE%20LA%20CONVOCATORIA%20INTERNA%20PARA%20EL%20FINANCIAMIENTO%20DE%20PROYECTOS%20DE%20INVESTIGACI%C3%93N%20DEL%20CCYH%202026.pdf"
+                target="_blank"
+                class="flex items-center p-5 border border-neutral-subtle rounded-xl hover:shadow-md transition-shadow group cursor-pointer bg-neutral-subtle/10">
+                <div class="size-12 bg-primary/10 text-primary flex items-center justify-center rounded-lg mr-4">
+                  <span class="material-symbols-outlined text-3xl">picture_as_pdf</span>
+                </div>
+                <div class="flex-1">
+                  <h4 class="font-bold text-sm">Glosario de la Convocatoria 2026</h4>
+                  <p class="text-[11px] text-neutral-muted uppercase font-bold tracking-widest mt-1">PDF • 217 KB</p>
+                </div>
+                <div class="p-2 text-primary-dark hover:bg-primary/10 rounded-full transition-colors">
+                  <span class="material-symbols-outlined">download</span>
+                </div>
+              </a>
+              <!-- 2. CCH-RGI-NUEVO -->
+              <a href="ConvocatoriaFinanciamiento/CCH-RGI-NUEVO.xlsx" target="_blank"
+                class="flex items-center p-5 border border-neutral-subtle rounded-xl hover:shadow-md transition-shadow group cursor-pointer bg-neutral-subtle/10">
+                <div class="size-12 bg-primary/10 text-primary flex items-center justify-center rounded-lg mr-4">
+                  <span class="material-symbols-outlined text-3xl">table_chart</span>
+                </div>
+                <div class="flex-1">
+                  <h4 class="font-bold text-sm">CCH-RGI-NUEVO</h4>
+                  <p class="text-[11px] text-neutral-muted uppercase font-bold tracking-widest mt-1">XLSX • 52 KB</p>
+                </div>
+                <div class="p-2 text-primary-dark hover:bg-primary/10 rounded-full transition-colors">
+                  <span class="material-symbols-outlined">download</span>
+                </div>
+              </a>
+              <!-- 3. Formato I -->
+              <a href="ConvocatoriaFinanciamiento/FORMATO%20I%20CONVOCATORIA%20INTERNA%20PARA%20EL%20FINANCIAMIENTO%20DE%20PROYECTOS%20DE%20INVESTIGACI%C3%93N%20DEL%20CCYH%202026.docx"
+                target="_blank"
+                class="flex items-center p-5 border border-neutral-subtle rounded-xl hover:shadow-md transition-shadow group cursor-pointer bg-neutral-subtle/10">
+                <div class="size-12 bg-primary/10 text-primary flex items-center justify-center rounded-lg mr-4">
+                  <span class="material-symbols-outlined text-3xl">description</span>
+                </div>
+                <div class="flex-1">
+                  <h4 class="font-bold text-sm">Formato I - Convocatoria 2026</h4>
+                  <p class="text-[11px] text-neutral-muted uppercase font-bold tracking-widest mt-1">DOCX • 1.1 MB</p>
+                </div>
+                <div class="p-2 text-primary-dark hover:bg-primary/10 rounded-full transition-colors">
+                  <span class="material-symbols-outlined">download</span>
+                </div>
+              </a>
+              <!-- 4. Formato II -->
+              <a href="ConvocatoriaFinanciamiento/FORMATO%20II%20CONVOCATORIA%20INTERNA%20PARA%20EL%20FINANCIAMIENTO%20DE%20PROYECTOS%20DE%20INVESTIGACI%C3%93N%20DEL%20CCYH%202026.docx"
+                target="_blank"
+                class="flex items-center p-5 border border-neutral-subtle rounded-xl hover:shadow-md transition-shadow group cursor-pointer bg-neutral-subtle/10">
+                <div class="size-12 bg-primary/10 text-primary flex items-center justify-center rounded-lg mr-4">
+                  <span class="material-symbols-outlined text-3xl">description</span>
+                </div>
+                <div class="flex-1">
+                  <h4 class="font-bold text-sm">Formato II - Convocatoria 2026</h4>
+                  <p class="text-[11px] text-neutral-muted uppercase font-bold tracking-widest mt-1">DOCX • 8.6 MB</p>
+                </div>
+                <div class="p-2 text-primary-dark hover:bg-primary/10 rounded-full transition-colors">
+                  <span class="material-symbols-outlined">download</span>
+                </div>
+              </a>
+              <!-- 5. Formato III -->
+              <a href="ConvocatoriaFinanciamiento/FORMATO%20III%20CONVOCATORIA%20INTERNA%20PARA%20EL%20FINANCIAMIENTO%20DE%20PROYECTOS%20DE%20INVESTIGACI%C3%93N%20DEL%20CCYH%202026.xlsx"
+                target="_blank"
+                class="flex items-center p-5 border border-neutral-subtle rounded-xl hover:shadow-md transition-shadow group cursor-pointer bg-neutral-subtle/10">
+                <div class="size-12 bg-primary/10 text-primary flex items-center justify-center rounded-lg mr-4">
+                  <span class="material-symbols-outlined text-3xl">table_chart</span>
+                </div>
+                <div class="flex-1">
+                  <h4 class="font-bold text-sm">Formato III - Convocatoria 2026</h4>
+                  <p class="text-[11px] text-neutral-muted uppercase font-bold tracking-widest mt-1">XLSX • 1.3 MB</p>
+                </div>
+                <div class="p-2 text-primary-dark hover:bg-primary/10 rounded-full transition-colors">
+                  <span class="material-symbols-outlined">download</span>
+                </div>
+              </a>
+            </div>
+          </article>
+        </div>
+        <!-- Footer Section -->
+        <div id="footer-root"></div>
+      </main>
+    </div>
+  </div>
+  <script src="assets/js/main.js"></script>`n
+</body>
+
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>UACM Researcher Dashboard Status</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/shared.css">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#701705",
+                        "institutional-red": "#9C2007",
+                        "background-light": "#f8f6f5",
+                        "background-dark": "#221310",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .sidebar-active {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-left: 4px solid white;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-[#1c0f0d]">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div id="header-root"></div>
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col min-w-0 overflow-hidden">
+            <!-- Header -->
+            <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 shrink-0">
+                <div class="flex-1 max-w-xl">
+                    <div class="relative group">
+                        <span
+                            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary">search</span>
+                        <input
+                            class="w-full pl-10 pr-4 py-2 bg-background-light border-none rounded-lg focus:ring-2 focus:ring-primary/20 text-sm"
+                            placeholder="Buscar investigaciones o documentos..." type="text" />
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button class="p-2 text-gray-500 hover:bg-background-light rounded-full relative">
+                        <span class="material-symbols-outlined">notifications</span>
+                        <span
+                            class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white"></span>
+                    </button>
+                    <button class="p-2 text-gray-500 hover:bg-background-light rounded-full">
+                        <span class="material-symbols-outlined">settings</span>
+                    </button>
+                    <div class="h-8 w-[1px] bg-gray-200 mx-2"></div>
+                    <a href="registro.html"
+                        class="flex items-center gap-2 bg-primary text-white调节 px-4 py-2 rounded-lg font-semibold text-sm hover:bg-primary/90 transition-all shadow-sm">
+                        <span class="material-symbols-outlined text-sm">add</span>
+                        Nuevo Proyecto
+                    </a>
+                </div>
+            </header>
+            <!-- Content Area -->
+            <div class="flex-1 overflow-y-auto p-8 bg-background-light/50">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-primary">Estado de Proyectos</h2>
+                    <p class="text-gray-500 mt-1">Gestión y seguimiento de investigaciones académicas vigentes.</p>
+                </div>
+                <!-- Status Cards Grid -->
+                <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+                    <!-- Proyecto Borrador -->
+                    <div class="bg-white rounded-xl shadow-sm border-l-4 border-amber-400 flex flex-col">
+                        <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="bg-amber-100 text-amber-700 p-2 rounded-lg">
+                                    <span class="material-symbols-outlined">edit_note</span>
+                                </div>
+                                <h3 class="font-bold text-lg text-gray-800">Borradores</h3>
+                            </div>
+                            <span class="bg-amber-100 text-amber-700 text-xs font-bold px-2 py-1 rounded-full">3
+                                Proyectos</span>
+                        </div>
+                        <div class="p-4 space-y-4 flex-1">
+                            <!-- Draft 1 -->
+                            <div
+                                class="p-4 bg-background-light rounded-lg border border-gray-100 hover:border-amber-200 transition-colors group cursor-pointer">
+                                <h4
+                                    class="font-semibold text-sm text-gray-900 mb-1 group-hover:text-primary transition-colors">
+                                    Impacto de la Inteligencia Artificial en CCH</h4>
+                                <p class="text-[11px] text-gray-500 mb-3">Última edición: 24 Oct 2023</p>
+                                <div class="flex items-center justify-between text-[11px] mb-1">
+                                    <span class="text-amber-700 font-medium">Progreso 45%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-1.5">
+                                    <div class="bg-amber-400 h-1.5 rounded-full" style="width: 45%"></div>
+                                </div>
+                            </div>
+                            <!-- Draft 2 -->
+                            <div
+                                class="p-4 bg-background-light rounded-lg border border-gray-100 hover:border-amber-200 transition-colors group cursor-pointer">
+                                <h4 class="font-semibold text-sm text-gray-900 mb-1">Sociología en la periferia de la
+                                    CDMX</h4>
+                                <p class="text-[11px] text-gray-500 mb-3">Última edición: 18 Oct 2023</p>
+                                <div class="flex items-center justify-between text-[11px] mb-1">
+                                    <span class="text-amber-700 font-medium">Progreso 15%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-1.5">
+                                    <div class="bg-amber-400 h-1.5 rounded-full" style="width: 15%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 border-t border-gray-50 bg-gray-50/50 rounded-b-xl">
+                            <button class="w-full text-center text-xs font-bold text-amber-700 hover:underline">Ver
+                                todos los borradores</button>
+                        </div>
+                    </div>
+                    <!-- Proyecto Enviado -->
+                    <div class="bg-white rounded-xl shadow-sm border-l-4 border-blue-500 flex flex-col">
+                        <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="bg-blue-100 text-blue-700 p-2 rounded-lg">
+                                    <span class="material-symbols-outlined">send</span>
+                                </div>
+                                <h3 class="font-bold text-lg text-gray-800">Enviados</h3>
+                            </div>
+                            <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded-full">1
+                                Proyecto</span>
+                        </div>
+                        <div class="p-4 space-y-4 flex-1">
+                            <div
+                                class="p-4 bg-background-light rounded-lg border border-gray-100 border-l-2 border-l-blue-400">
+                                <div class="flex justify-between items-start mb-1">
+                                    <h4 class="font-semibold text-sm text-gray-900">Estudio de Sustentabilidad
+                                        Alimentaria</h4>
+                                    <span class="text-[10px] bg-blue-100 text-blue-800 px-1.5 py-0.5 rounded">En
+                                        revisión</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 mb-3">Enviado: 12 Oct 2023</p>
+                                <div class="flex items-center gap-2 text-[11px] text-gray-600">
+                                    <span class="material-symbols-outlined text-sm">schedule</span>
+                                    Tiempo estimado: 15 días hábiles
+                                </div>
+                            </div>
+                            <div class="h-full flex flex-col items-center justify-center opacity-30 py-8">
+                                <span class="material-symbols-outlined text-4xl mb-2">inbox</span>
+                                <p class="text-xs">No hay más envíos recientes</p>
+                            </div>
+                        </div>
+                        <div class="p-4 border-t border-gray-50 bg-gray-50/50 rounded-b-xl">
+                            <button class="w-full text-center text-xs font-bold text-blue-700 hover:underline">Rastrear
+                                solicitudes</button>
+                        </div>
+                    </div>
+                    <!-- Proyecto Aprobado -->
+                    <div class="bg-white rounded-xl shadow-sm border-l-4 border-emerald-500 flex flex-col">
+                        <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="bg-emerald-100 text-emerald-700 p-2 rounded-lg">
+                                    <span class="material-symbols-outlined">verified</span>
+                                </div>
+                                <h3 class="font-bold text-lg text-gray-800">Aprobados</h3>
+                            </div>
+                            <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-2 py-1 rounded-full">5
+                                Proyectos</span>
+                        </div>
+                        <div class="p-4 space-y-4 flex-1">
+                            <!-- Approved 1 -->
+                            <div class="p-4 bg-background-light rounded-lg border border-gray-100">
+                                <div class="flex justify-between items-start mb-1">
+                                    <h4 class="font-semibold text-sm text-gray-900">Análisis del discurso en medios
+                                        locales</h4>
+                                    <span class="material-symbols-outlined text-emerald-500 text-sm">check_circle</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 mb-3">Aprobado el: 05 Sep 2023</p>
+                                <div class="flex items-center justify-between text-[11px] mb-1">
+                                    <span class="text-emerald-700 font-medium">Ejecución 88%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-1.5">
+                                    <div class="bg-emerald-500 h-1.5 rounded-full" style="width: 88%"></div>
+                                </div>
+                            </div>
+                            <!-- Approved 2 -->
+                            <div class="p-4 bg-background-light rounded-lg border border-gray-100">
+                                <div class="flex justify-between items-start mb-1">
+                                    <h4 class="font-semibold text-sm text-gray-900">Pedagogía Crítica en la UACM</h4>
+                                    <span class="material-symbols-outlined text-emerald-500 text-sm">check_circle</span>
+                                </div>
+                                <p class="text-[11px] text-gray-500 mb-3">Aprobado el: 20 Ago 2023</p>
+                                <div class="flex items-center justify-between text-[11px] mb-1">
+                                    <span class="text-emerald-700 font-medium">Ejecución 100%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-1.5">
+                                    <div class="bg-emerald-500 h-1.5 rounded-full" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 border-t border-gray-50 bg-gray-50/50 rounded-b-xl">
+                            <button
+                                class="w-full text-center text-xs font-bold text-emerald-700 hover:underline">Gestionar
+                                proyectos activos</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Recent Activity Section -->
+                <div class="mt-8">
+                    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                        <div class="px-6 py-4 border-b border-gray-100">
+                            <h3 class="font-bold text-gray-800">Actividad Reciente</h3>
+                        </div>
+                        <div class="divide-y divide-gray-100">
+                            <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                <div class="flex items-center gap-4">
+                                    <div
+                                        class="size-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-sm">upload_file</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium">Documento subido a "Estudio de Sustentabilidad"
+                                        </p>
+                                        <p class="text-[11px] text-gray-400">Hace 2 horas</p>
+                                    </div>
+                                </div>
+                                <button class="text-xs text-primary font-bold hover:underline">Ver</button>
+                            </div>
+                            <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                                <div class="flex items-center gap-4">
+                                    <div
+                                        class="size-8 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-sm">edit</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium">Actualización de borrador: "Impacto de la IA"</p>
+                                        <p class="text-[11px] text-gray-400">Ayer, 14:30</p>
+                                    </div>
+                                </div>
+                                <button class="text-xs text-primary font-bold hover:underline">Continuar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div id="footer-root"></div>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
+
+

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>UACM Admin Project Management List</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#701705",
+                        "accent": "#9C2007",
+                        "background-light": "#f8f6f5",
+                        "background-dark": "#221310",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-[#1c0f0d]">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Persistent Sidebar -->
+        <div id="header-root"></div>
+        <!-- Main Content Area -->
+        <main class="flex-1 flex flex-col min-w-0 overflow-hidden bg-background-light">
+            <!-- Header & Search -->
+            <header class="bg-white border-b border-primary/5 px-8 py-6">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-primary tracking-tight">Gestión de Proyectos</h2>
+                        <p class="text-[#9d5648] text-sm">Panel administrativo para el seguimiento de folios y
+                            evaluaciones de investigación.</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <button class="p-2 text-primary/60 hover:bg-primary/5 rounded-full transition-colors relative">
+                            <span class="material-symbols-outlined">notifications</span>
+                            <span
+                                class="absolute top-1.5 right-1.5 size-2 bg-red-500 rounded-full border-2 border-white"></span>
+                        </button>
+                        <div class="h-8 w-px bg-primary/10"></div>
+                        <div class="flex items-center gap-2">
+                            <img class="size-8 rounded-full border border-primary/20"
+                                data-alt="User profile avatar of admin"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwn3MZAPkAQ19GrtFeiq3zyS0TCjiZHTBnnqrECMQUc4MaOHwapZbN2mER1jONm72XcOn-mibWGjw3zggnfUl0W9Dr6ToKzZ3u4LxJVqd1V2rxz50-OBFg6utv21uyJ0Ca-pOIFLmzmXwuQ7heqYnuLqE-5m2-2bpH3-gG4rcfmwfblgvN6_SweBWzvvgd9PjjTuiGKjOFt43mPF2LytIjLvrjMHe0H4q0zo83TEzdyBECW8srOhaTv1nsPfA1qQUIEdGUlfmAHg51" />
+                            <span class="text-sm font-medium text-primary/80">Admin CCH</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- Filters Toolbar -->
+            <div class="px-8 py-4 bg-white/50 border-b border-primary/5">
+                <div class="flex flex-wrap items-center gap-4">
+                    <!-- Search Bar -->
+                    <div class="flex-1 min-w-[300px]">
+                        <div class="relative">
+                            <span
+                                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary/40">search</span>
+                            <input
+                                class="w-full pl-10 pr-4 py-2 bg-white border border-primary/10 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none text-sm transition-all"
+                                placeholder="Buscar por folio, título o investigador..." type="text" />
+                        </div>
+                    </div>
+                    <!-- Dropdowns -->
+                    <div class="flex items-center gap-2">
+                        <div class="relative">
+                            <select
+                                class="appearance-none bg-white border border-primary/10 rounded-lg pl-4 pr-10 py-2 text-sm text-primary/70 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none cursor-pointer">
+                                <option>Filtrar por Área</option>
+                                <option>Ciencias Naturales</option>
+                                <option>Humanidades</option>
+                                <option>Ciencia y Tecnología</option>
+                                <option>Ciencias Sociales</option>
+                            </select>
+                            <span
+                                class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-primary/40 pointer-events-none">expand_more</span>
+                        </div>
+                        <div class="relative">
+                            <select
+                                class="appearance-none bg-white border border-primary/10 rounded-lg pl-4 pr-10 py-2 text-sm text-primary/70 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none cursor-pointer">
+                                <option>Estado: Todos</option>
+                                <option>Pendiente</option>
+                                <option>En Evaluación</option>
+                                <option>Aprobado</option>
+                            </select>
+                            <span
+                                class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-primary/40 pointer-events-none">expand_more</span>
+                        </div>
+                        <button
+                            class="flex items-center gap-2 bg-white border border-primary/10 px-4 py-2 rounded-lg text-sm text-primary/70 hover:bg-primary/5 transition-colors">
+                            <span class="material-symbols-outlined text-lg">calendar_today</span>
+                            <span>Rango de fechas</span>
+                        </button>
+                        <button
+                            class="flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary/20 transition-colors">
+                            <span class="material-symbols-outlined text-lg">file_download</span>
+                            <span>Exportar</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Content Body / Data Table -->
+            <div class="flex-1 overflow-auto p-8">
+                <div class="bg-white rounded-xl shadow-sm border border-primary/10 overflow-hidden">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-primary/[0.02] border-b border-primary/10">
+                                <th class="px-6 py-4 text-xs font-bold text-primary/60 uppercase tracking-wider">Folio
+                                </th>
+                                <th class="px-6 py-4 text-xs font-bold text-primary/60 uppercase tracking-wider">Título
+                                </th>
+                                <th class="px-6 py-4 text-xs font-bold text-primary/60 uppercase tracking-wider">
+                                    Investigador</th>
+                                <th class="px-6 py-4 text-xs font-bold text-primary/60 uppercase tracking-wider">Área
+                                </th>
+                                <th class="px-6 py-4 text-xs font-bold text-primary/60 uppercase tracking-wider">Fecha
+                                    Envío</th>
+                                <th class="px-6 py-4 text-xs font-bold text-primary/60 uppercase tracking-wider">Estado
+                                </th>
+                                <th
+                                    class="px-6 py-4 text-xs font-bold text-primary/60 uppercase tracking-wider text-center">
+                                    Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-primary/5">
+                            <!-- Row 1 -->
+                            <tr class="hover:bg-primary/[0.01] transition-colors">
+                                <td class="px-6 py-4 text-sm font-medium text-primary">UACM-2023-042</td>
+                                <td class="px-6 py-4 max-w-xs">
+                                    <a class="text-sm font-medium text-primary hover:underline decoration-accent leading-tight block"
+                                        href="#">Impacto de la movilidad urbana en la periferia de la CDMX</a>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-primary/80">Dr. Roberto Hernández</td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="text-xs px-2.5 py-1 bg-primary/5 text-primary/70 rounded font-medium">Ciencias
+                                        Sociales</span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-primary/60">12 Oct 2023</td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800">
+                                        Pendiente
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center justify-center gap-2">
+                                        <a href="admin-evaluacion.html"
+                                            class="p-1.5 text-primary/60 hover:text-primary hover:bg-primary/5 rounded-md transition-all"
+                                            title="Revisar">
+                                            <span class="material-symbols-outlined text-lg">visibility</span>
+                                        </a>
+                                        <button
+                                            class="p-1.5 text-primary/60 hover:text-primary hover:bg-primary/5 rounded-md transition-all"
+                                            title="Asignar Evaluador">
+                                            <span class="material-symbols-outlined text-lg">person_add</span>
+                                        </button>
+                                        <button
+                                            class="p-1.5 text-primary/60 hover:text-primary hover:bg-primary/5 rounded-md transition-all"
+                                            title="Descargar">
+                                            <span class="material-symbols-outlined text-lg">download</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 2 -->
+                            <tr class="hover:bg-primary/[0.01] transition-colors">
+                                <td class="px-6 py-4 text-sm font-medium text-primary">UACM-2023-038</td>
+                                <td class="px-6 py-4 max-w-xs">
+                                    <a class="text-sm font-medium text-primary hover:underline decoration-accent leading-tight block"
+                                        href="#">Análisis fitogeográfico en el plantel San Lorenzo Tezonco</a>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-primary/80">Dra. Elena Martínez</td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="text-xs px-2.5 py-1 bg-primary/5 text-primary/70 rounded font-medium">Ciencias
+                                        Naturales</span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-primary/60">05 Oct 2023</td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
+                                        En Evaluación
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center justify-center gap-2">
+                                        <button
+                                            class="p-1.5 text-primary/60 hover:text-primary hover:bg-primary/5 rounded-md transition-all"
+                                            title="Revisar">
+                                            <span class="material-symbols-outlined text-lg">visibility</span>
+                                        </button>
+                                        <button
+                                            class="p-1.5 text-primary/60 hover:text-primary hover:bg-primary/5 rounded-md transition-all"
+                                            title="Asignar Evaluador">
+                                            <span class="material-symbols-outlined text-lg">person_add</span>
+                                        </button>
+                                        <button
+                                            class="p-1.5 text-primary/60 hover:text-primary hover:bg-primary/5 rounded-md transition-all"
+                                            title="Descargar">
+                                            <span class="material-symbols-outlined text-lg">download</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 3 -->
+                            <tr class="hover:bg-primary/[0.01] transition-colors">
+                                <td class="px-6 py-4 text-sm font-medium text-primary">UACM-2023-035</td>
+                                <td class="px-6 py-4 max-w-xs">
+                                    <a class="text-sm font-medium text-primary hover:underline decoration-accent leading-tight block"
+                                        href="#">Desarrollo de algoritmos de optimización para red hídrica</a>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-primary/80">Mtro. Jorge Luis Soto</td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="text-xs px-2.5 py-1 bg-primary/5 text-primary/70 rounded font-medium">Ciencia
+                                        y Tecnología</span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-primary/60">28 Sep 2023</td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800">
+                                        Aprobado
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center justify-center gap-2">
+                                        <button
+                                            class="p-1.5 text-primary/60 hover:text-primary hover:bg-primary/5 rounded-md transition-all"
+                                            title="Revisar">
+                                            <span class="material-symbols-outlined text-lg">visibility</span>
+                                        </button>
+                                        <button
+                                            class="p-1.5 text-primary/60 hover:text-primary hover:bg-primary/5 rounded-md transition-all"
+                                            title="Asignar Evaluador">
+                                            <span class="material-symbols-outlined text-lg">person_add</span>
+                                        </button>
+                                        <button
+                                            class="p-1.5 text-primary/60 hover:text-primary hover:bg-primary/5 rounded-md transition-all"
+                                            title="Descargar">
+                                            <span class="material-symbols-outlined text-lg">download</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Row 4 -->
+                            <tr class="hover:bg-primary/[0.01] transition-colors">
+                                <td class="px-6 py-4 text-sm font-medium text-primary">UACM-2023-031</td>
+                                <td class="px-6 py-4 max-w-xs">
+                                    <a class="text-sm font-medium text-primary hover:underline decoration-accent leading-tight block"
+                                        href="#">Narrativas de la Revolución en la literatura contemporánea</a>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-primary/80">Dra. Claudia Ruiz</td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="text-xs px-2.5 py-1 bg-primary/5 text-primary/70 rounded font-medium">Humanidades</span>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-primary/60">15 Sep 2023</td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800">
+                                        Aprobado
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center justify-center gap-2">
+                                        <button
+                                            class="p-1.5 text-primary/60 hover:text-primary hover:bg-primary/5 rounded-md transition-all"
+                                            title="Revisar">
+                                            <span class="material-symbols-outlined text-lg">visibility</span>
+                                        </button>
+                                        <button
+                                            class="p-1.5 text-primary/60 hover:text-primary hover:bg-primary/5 rounded-md transition-all"
+                                            title="Asignar Evaluador">
+                                            <span class="material-symbols-outlined text-lg">person_add</span>
+                                        </button>
+                                        <button
+                                            class="p-1.5 text-primary/60 hover:text-primary hover:bg-primary/5 rounded-md transition-all"
+                                            title="Descargar">
+                                            <span class="material-symbols-outlined text-lg">download</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- Pagination Footer -->
+                    <div
+                        class="px-6 py-4 border-t border-primary/10 flex items-center justify-between bg-primary/[0.01]">
+                        <p class="text-xs text-primary/60">Mostrando 1-4 de 28 resultados</p>
+                        <div class="flex items-center gap-1">
+                            <button class="p-1 rounded hover:bg-primary/10 text-primary/60 disabled:opacity-30"
+                                disabled="">
+                                <span class="material-symbols-outlined">chevron_left</span>
+                            </button>
+                            <button class="size-8 rounded-md bg-primary text-white text-xs font-bold">1</button>
+                            <button
+                                class="size-8 rounded-md hover:bg-primary/10 text-primary/70 text-xs font-medium">2</button>
+                            <button
+                                class="size-8 rounded-md hover:bg-primary/10 text-primary/70 text-xs font-medium">3</button>
+                            <span class="px-2 text-primary/40">...</span>
+                            <button
+                                class="size-8 rounded-md hover:bg-primary/10 text-primary/70 text-xs font-medium">7</button>
+                            <button class="p-1 rounded hover:bg-primary/10 text-primary/60">
+                                <span class="material-symbols-outlined">chevron_right</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div id="footer-root"></div>
+    <script src="assets/js/main.js"></script>`n</body>
+
+</html>
+
+
+
