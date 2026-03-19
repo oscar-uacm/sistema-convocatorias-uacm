@@ -3,6 +3,9 @@ session_start();
 $logueado = isset($_SESSION['user_id']);
 $nombre_usuario = $logueado ? $_SESSION['nombre'] : '';
 
+// 1. RUTA DE ARCHIVOS CORREGIDA
+$folder = "ConvocatoriaFinanciamiento/";
+
 // Mapeo completo de los archivos reales en tu carpeta ConvocatoriaFinanciamiento
 $documentacion = [
     'Formatos de Registro y Protocolo' => [
@@ -114,7 +117,10 @@ $documentacion = [
                             </h2>
                             
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <?php foreach ($items as $doc): ?>
+                                <?php foreach ($items as $doc): 
+                                    // Construimos la ruta segura para cada archivo
+                                    $safe_url = $folder . rawurlencode($doc['file']);
+                                ?>
                                     <div class="flex items-start p-6 border border-neutral-subtle rounded-2xl hover:border-primary/30 hover:shadow-lg transition-all bg-white group">
                                         <div class="size-12 bg-background-light flex items-center justify-center rounded-xl mr-5 group-hover:bg-primary/5 transition-colors">
                                             <span class="material-symbols-outlined <?php echo $doc['color']; ?> text-3xl"><?php echo $doc['icon']; ?></span>
@@ -123,12 +129,19 @@ $documentacion = [
                                             <h4 class="font-bold text-neutral-text text-sm mb-1"><?php echo $doc['nombre']; ?></h4>
                                             <p class="text-[10px] text-neutral-muted uppercase font-bold tracking-tighter mb-4">Ciclo 2026 • Oficial</p>
                                             
-                                            <a href="frontend/ConvocatoriaFinanciamiento/<?php echo urlencode($doc['file']); ?>" 
-                                               target="_blank" 
-                                               class="inline-flex items-center text-primary font-bold text-[11px] uppercase tracking-widest hover:underline">
-                                                Descargar Archivo
-                                                <span class="material-symbols-outlined text-xs ml-1">download</span>
-                                            </a>
+                                            <div class="flex items-center gap-4">
+                                                <button onclick="verDocumento('<?php echo $safe_url; ?>', '<?php echo htmlspecialchars($doc['nombre'], ENT_QUOTES); ?>')" 
+                                                        class="inline-flex items-center text-primary-dark font-bold text-[11px] uppercase tracking-widest hover:underline cursor-pointer">
+                                                    Ver
+                                                    <span class="material-symbols-outlined text-xs ml-1">visibility</span>
+                                                </button>
+                                                
+                                                <a href="<?php echo $safe_url; ?>" download="<?php echo htmlspecialchars($doc['file'], ENT_QUOTES); ?>" 
+                                                   class="inline-flex items-center text-primary font-bold text-[11px] uppercase tracking-widest hover:underline">
+                                                    Descargar
+                                                    <span class="material-symbols-outlined text-xs ml-1">download</span>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 <?php endforeach; ?>
@@ -143,5 +156,38 @@ $documentacion = [
             </main>
         </div>
     </div>
+
+    <div id="modalPDF" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden items-center justify-center z-[100] p-6">
+        <div class="bg-white w-full max-w-6xl h-[90vh] rounded-2xl overflow-hidden flex flex-col shadow-2xl">
+            <div class="px-10 py-6 border-b border-neutral-subtle flex justify-between items-center bg-background-light">
+                <h3 id="modalTitle" class="text-sm font-bold uppercase tracking-widest text-primary"></h3>
+                <button onclick="cerrarModal()" class="size-10 flex items-center justify-center hover:bg-neutral-subtle text-neutral-muted hover:text-primary rounded-full transition-all">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div id="modalBody" class="flex-grow bg-background-light"></div>
+        </div>
+    </div>
+
+    <script>
+        function verDocumento(url, titulo) {
+            const ext = url.split('.').pop().toLowerCase();
+            if (ext !== 'pdf') {
+                alert("La previsualización solo está disponible para documentos PDF. Use el botón 'Descargar' para Word/Excel.");
+                return;
+            }
+            document.getElementById('modalTitle').innerText = titulo;
+            document.getElementById('modalBody').innerHTML = `<iframe src="${url}" class="w-full h-full border-none"></iframe>`;
+            document.getElementById('modalPDF').classList.remove('hidden');
+            document.getElementById('modalPDF').classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function cerrarModal() {
+            document.getElementById('modalPDF').classList.add('hidden');
+            document.getElementById('modalBody').innerHTML = '';
+            document.body.style.overflow = 'auto';
+        }
+    </script>
 </body>
 </html>
