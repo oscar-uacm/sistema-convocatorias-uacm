@@ -19,7 +19,7 @@ Para poder ejecutar este proyecto en tu computadora local, necesitas tener insta
 Abre tu terminal y ejecuta:
 \`\`\`bash
 git clone https://github.com/oscar-uacm/sistema-convocatorias-uacm
-cd TU_REPOSITORIO
+cd bd_convocatoria
 \`\`\`
 
 **2. Instalar dependencias**
@@ -31,7 +31,7 @@ npm install
 **3. Configurar la Base de Datos (Docker)**
 Asegúrate de tener Docker abierto. Levanta tu contenedor de MySQL e importa la estructura de la base de datos incluida en este proyecto:
 \`\`\`bash
-# (Aquí puedes agregar el comando exacto que usas para iniciar tu docker, por ejemplo docker-compose up -d)
+# Comando  para iniciar tu docker,  docker-compose up -d
 \`\`\`
 Una vez que MySQL esté corriendo, importa las tablas usando el archivo `estructura_bd.sql`.
 
@@ -40,7 +40,7 @@ Renombra el archivo de configuración (si aplica) o asegúrate de que tu archivo
 
 **5. Iniciar el servidor**
 \`\`\`bash
-# (Aquí pon el comando que usas para arrancar tu proyecto, por ejemplo: node index.js o si usas servidor PHP)
+# ( comando que usas para arrancar el proyecto, 
 \`\`\`
 
 ##  Notas de Seguridad
