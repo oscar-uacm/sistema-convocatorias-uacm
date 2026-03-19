@@ -2,10 +2,14 @@
 session_start();
 require_once 'conexion.php';
 
-// Mensajes de estado
+// 1. GESTIÓN DE MENSAJES DINÁMICOS
 $mensaje_exito = "";
-if (isset($_GET['status']) && $_GET['status'] == 'sesion_cerrada') {
-    $mensaje_exito = "Has cerrado sesión correctamente.";
+if (isset($_GET['status'])) {
+    if ($_GET['status'] == 'sesion_cerrada') {
+        $mensaje_exito = "Has cerrado sesión correctamente.";
+    } elseif ($_GET['status'] == 'registro_exitoso') {
+        $mensaje_exito = "¡Registro completado con éxito! Ya puedes iniciar sesión.";
+    }
 }
 
 $error = "";
@@ -19,17 +23,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($fila = mysqli_fetch_assoc($resultado)) {
         if (password_verify($password, $fila['password'])) {
-            
-            // Seteamos la sesión
             $_SESSION['user_id'] = $fila['id'];
             $_SESSION['nombre']  = $fila['nombre'];
             $_SESSION['rol']     = $fila['rol'];
 
-            // Redirección inmediata según el rol
+            // Redirección por roles (Incluyendo Comité y Evaluador)
             if ($_SESSION['rol'] === 'admin') {
                 header("Location: admin-dashboard.php");
             } elseif ($_SESSION['rol'] === 'evaluador') {
                 header("Location: admin-proyectos.php");
+            } elseif ($_SESSION['rol'] === 'comite') {
+                header("Location: comite-dashboard.php");
             } else {
                 header("Location: dashboard.php");
             }
@@ -45,45 +49,79 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UACM - Iniciar Sesión</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;800&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <style>
+        body { font-family: 'Lexend', sans-serif; }
+        .bg-uacm { background-color: #701705; }
+        .text-uacm { color: #701705; }
+        .ring-uacm:focus { --tw-ring-color: rgba(112, 23, 5, 0.2); }
+    </style>
 </head>
-<body class="bg-[#f8f6f5] min-h-screen flex flex-col items-center justify-center p-4">
+<body class="bg-[#fcfaf9] min-h-screen flex items-center justify-center p-6">
 
-    <?php if ($mensaje_exito): ?>
-        <div class="mb-6 p-4 bg-green-50 border border-green-100 text-green-700 text-xs font-bold rounded-2xl flex items-center gap-2">
-            <span class="material-symbols-outlined text-sm">check_circle</span>
-            <?php echo $mensaje_exito; ?>
-        </div>
-    <?php endif; ?>
-
-    <div class="max-w-md w-full bg-white rounded-[2.5rem] shadow-xl p-10 border border-gray-100">
-        <div class="text-center mb-8">
-            <h1 class="text-3xl font-black text-[#701705] italic tracking-tighter uppercase">UACM</h1>
-            <p class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mt-2">Acceso al Sistema</p>
-        </div>
-
-        <?php if ($error): ?>
-            <div class="bg-red-50 text-red-600 text-[10px] font-bold p-4 rounded-2xl mb-6 flex items-center gap-2 uppercase">
-                <span class="material-symbols-outlined text-sm">error</span> <?php echo $error; ?>
+    <div class="w-full max-w-md">
+        <div class="bg-white rounded-[3rem] shadow-2xl shadow-gray-200 border border-gray-100 p-10 relative overflow-hidden">
+            
+            <div class="text-center mb-10">
+                <div class="size-20 bg-uacm text-white rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-red-900/20 transform -rotate-3">
+                    <span class="material-symbols-outlined text-4xl font-bold">account_circle</span>
+                </div>
+                <h1 class="text-3xl font-black text-gray-900 tracking-tighter">Acceso UACM</h1>
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mt-3">Investigación Científica CCyH</p>
             </div>
-        <?php endif; ?>
 
-        <form action="login.php" method="POST" class="space-y-4">
-            <input type="email" name="correo" required placeholder="Correo Institucional" class="w-full px-5 py-4 bg-gray-50 rounded-2xl text-sm outline-none focus:ring-2 focus:ring-[#701705]/10 border-transparent focus:border-[#701705]">
-            <input type="password" name="password" required placeholder="Contraseña" class="w-full px-5 py-4 bg-gray-50 rounded-2xl text-sm outline-none focus:ring-2 focus:ring-[#701705]/10 border-transparent focus:border-[#701705]">
-            <button type="submit" class="w-full py-4 bg-[#701705] text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg hover:bg-black transition-all">Entrar</button>
-        </form>
+            <?php if ($mensaje_exito): ?>
+                <div class="bg-green-50 border border-green-100 text-green-700 text-[10px] font-black p-4 rounded-2xl mb-6 flex items-center gap-3 uppercase">
+                    <span class="material-symbols-outlined text-sm">check_circle</span>
+                    <?php echo $mensaje_exito; ?>
+                </div>
+            <?php endif; ?>
 
-        <div class="mt-8 pt-6 border-t border-gray-50 flex flex-col items-center gap-4">
-            <a href="index.php" class="text-xs font-bold text-gray-400 hover:text-[#701705] flex items-center gap-1 uppercase tracking-tighter">
-                <span class="material-symbols-outlined text-sm">home</span> Regresar a la Página Principal
-            </a>
-            <p class="text-[10px] text-gray-300">¿No tienes cuenta? <a href="registro-usuario.php" class="text-primary font-bold">Regístrate</a></p>
+            <?php if ($error): ?>
+                <div class="bg-red-50 border border-red-100 text-red-600 text-[10px] font-black p-4 rounded-2xl mb-6 flex items-center gap-3 uppercase">
+                    <span class="material-symbols-outlined text-sm">error</span>
+                    <?php echo $error; ?>
+                </div>
+            <?php endif; ?>
+
+            <form action="login.php" method="POST" class="space-y-4">
+                <input type="email" name="correo" required 
+                    placeholder="Correo Institucional" 
+                    class="w-full px-5 py-4 bg-gray-50 rounded-2xl text-sm outline-none focus:ring-2 ring-uacm border-transparent transition-all">
+
+                <input type="password" name="password" required 
+                    placeholder="Contraseña" 
+                    class="w-full px-5 py-4 bg-gray-50 rounded-2xl text-sm outline-none focus:ring-2 ring-uacm border-transparent transition-all">
+
+                <button type="submit" class="w-full py-4 bg-uacm text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg hover:bg-black transition-all">
+                    Iniciar Sesión
+                </button>
+            </form>
+
+            <div class="mt-8 pt-6 border-t border-gray-50 text-center">
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">¿No tienes una cuenta?</p>
+                <a href="registro.php" class="inline-flex items-center gap-2 text-uacm font-black text-xs uppercase tracking-widest hover:underline transition-all">
+                    <span class="material-symbols-outlined text-lg">person_add</span>
+                    Registrarse ahora
+                </a>
+            </div>
+
+            <div class="mt-6 text-center">
+                <a href="index.php" class="text-[9px] font-black text-gray-300 hover:text-gray-500 transition-colors uppercase tracking-[0.2em] flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-sm">arrow_back</span> Regresar al Portal
+                </a>
+            </div>
         </div>
+        
+        <p class="text-center mt-8 text-[10px] text-gray-400 font-medium uppercase tracking-tighter italic">
+            "Nada humano me es ajeno" — UACM 2026
+        </p>
     </div>
+
 </body>
 </html>
