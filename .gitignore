@@ -1,0 +1,15 @@
+# Ignorar dependencias pesadas de Node.js
+node_modules/
+
+# Ignorar archivos subidos por los usuarios (pero mantener las carpetas)
+uploads/proyectos/*
+uploads/convocatorias/*
+!uploads/proyectos/.gitkeep
+!uploads/convocatorias/.gitkeep
+
+# Ignorar archivos ocultos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Ignorar archivos de seguridad o de prueba que no deben hacerse públicos
+recuperar-password.php
