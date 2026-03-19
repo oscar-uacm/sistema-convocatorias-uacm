@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['nombre']  = $fila['nombre'];
             $_SESSION['rol']     = $fila['rol'];
 
-            // Redirección por roles (Incluyendo Comité y Evaluador)
+            // Redirección por roles
             if ($_SESSION['rol'] === 'admin') {
                 header("Location: admin-dashboard.php");
             } elseif ($_SESSION['rol'] === 'evaluador') {
@@ -39,63 +39,59 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             exit;
         } else {
-            $error = "Contraseña incorrecta.";
+            $error = "La contraseña ingresada es incorrecta.";
         }
     } else {
-        $error = "El correo no está registrado.";
+        $error = "El correo electrónico no se encuentra registrado.";
     }
 }
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UACM - Iniciar Sesión</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <style>
-        body { font-family: 'Lexend', sans-serif; }
+        body { font-family: 'Lexend', sans-serif; background-color: #fcfaf9; }
+        .uacm-red { color: #701705; }
         .bg-uacm { background-color: #701705; }
-        .text-uacm { color: #701705; }
-        .ring-uacm:focus { --tw-ring-color: rgba(112, 23, 5, 0.2); }
+        .ring-uacm:focus { --tw-ring-color: #701705; }
     </style>
 </head>
-<body class="bg-[#fcfaf9] min-h-screen flex items-center justify-center p-6">
+<body class="min-h-screen flex items-center justify-center p-6">
 
     <div class="w-full max-w-md">
-        <div class="bg-white rounded-[3rem] shadow-2xl shadow-gray-200 border border-gray-100 p-10 relative overflow-hidden">
+        <div class="bg-white rounded-[3rem] shadow-sm border border-gray-100 p-10 lg:p-12">
             
-            <div class="text-center mb-10">
-                <div class="size-20 bg-uacm text-white rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-red-900/20 transform -rotate-3">
-                    <span class="material-symbols-outlined text-4xl font-bold">account_circle</span>
+            <header class="text-center mb-10">
+                <div class="inline-flex items-center justify-center size-16 bg-gray-50 rounded-2xl mb-6">
+                    <span class="material-symbols-outlined uacm-red text-3xl">lock</span>
                 </div>
-                <h1 class="text-3xl font-black text-gray-900 tracking-tighter">Acceso UACM</h1>
-                <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mt-3">Investigación Científica CCyH</p>
-            </div>
+                <h1 class="text-2xl font-black text-gray-900 uppercase tracking-tighter">Acceso al Sistema</h1>
+                <p class="text-xs font-bold text-gray-400 mt-2 uppercase tracking-widest">Investigación CCyH</p>
+            </header>
 
             <?php if ($mensaje_exito): ?>
-                <div class="bg-green-50 border border-green-100 text-green-700 text-[10px] font-black p-4 rounded-2xl mb-6 flex items-center gap-3 uppercase">
-                    <span class="material-symbols-outlined text-sm">check_circle</span>
+                <div class="bg-green-50 border border-green-100 text-green-600 text-[10px] font-bold p-4 rounded-2xl mb-6 text-center uppercase">
                     <?php echo $mensaje_exito; ?>
                 </div>
             <?php endif; ?>
 
             <?php if ($error): ?>
-                <div class="bg-red-50 border border-red-100 text-red-600 text-[10px] font-black p-4 rounded-2xl mb-6 flex items-center gap-3 uppercase">
-                    <span class="material-symbols-outlined text-sm">error</span>
+                <div class="bg-red-50 border border-red-100 text-red-600 text-[10px] font-bold p-4 rounded-2xl mb-6 text-center uppercase">
                     <?php echo $error; ?>
                 </div>
             <?php endif; ?>
 
             <form action="login.php" method="POST" class="space-y-4">
-                <input type="email" name="correo" required 
-                    placeholder="Correo Institucional" 
+                <input type="email" name="correo" required placeholder="Correo Institucional" 
                     class="w-full px-5 py-4 bg-gray-50 rounded-2xl text-sm outline-none focus:ring-2 ring-uacm border-transparent transition-all">
-
-                <input type="password" name="password" required 
-                    placeholder="Contraseña" 
+                
+                <input type="password" name="password" required placeholder="Contraseña" 
                     class="w-full px-5 py-4 bg-gray-50 rounded-2xl text-sm outline-none focus:ring-2 ring-uacm border-transparent transition-all">
 
                 <button type="submit" class="w-full py-4 bg-uacm text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg hover:bg-black transition-all">
@@ -105,7 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <div class="mt-8 pt-6 border-t border-gray-50 text-center">
                 <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">¿No tienes una cuenta?</p>
-                <a href="registro.php" class="inline-flex items-center gap-2 text-uacm font-black text-xs uppercase tracking-widest hover:underline transition-all">
+                <a href="registro-usuario.php" class="inline-flex items-center gap-2 text-uacm font-black text-xs uppercase tracking-widest hover:underline transition-all">
                     <span class="material-symbols-outlined text-lg">person_add</span>
                     Registrarse ahora
                 </a>

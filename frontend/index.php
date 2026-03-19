@@ -127,7 +127,7 @@ $nombre_usuario = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : '';
                             <h3 class="text-2xl font-bold text-white">Documentación</h3>
                         </div>
                         <p class="text-[#cc998f] text-sm mb-8 flex-1">Formatos oficiales y manuales de usuario para tu postulación.</p>
-                        <a href="#" class="w-full h-12 rounded-lg bg-primary text-white font-bold btn-hover-effect flex items-center justify-center gap-2 text-sm">Descargar Formatos</a>
+                        <a href="convocatoria.php" class="w-full h-12 rounded-lg bg-primary text-white font-bold btn-hover-effect flex items-center justify-center gap-2 text-sm">Descargar Formatos</a>
                     </div>
                 </div>
             </div>

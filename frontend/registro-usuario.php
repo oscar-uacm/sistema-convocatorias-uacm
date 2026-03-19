@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrar'])) {
                 header("Location: login.php?status=registro_exitoso");
                 exit;
             } else {
-                $mensaje_error = "Error en el registro: " . mysqli_error($conexion);
+                $mensaje_error = "Error interno al registrar. Intente más tarde.";
             }
         }
     }
@@ -43,63 +43,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrar'])) {
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>UACM - Crear Cuenta</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UACM - Registro de Usuario</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <style>
-        body { font-family: 'Lexend', sans-serif; }
+        body { font-family: 'Lexend', sans-serif; background-color: #fcfaf9; }
+        .uacm-red { color: #701705; }
         .bg-uacm { background-color: #701705; }
-        .text-uacm { color: #701705; }
-        .ring-uacm:focus { --tw-ring-color: rgba(112, 23, 5, 0.2); }
+        .ring-uacm:focus { --tw-ring-color: #701705; }
     </style>
 </head>
-<body class="bg-[#fcfaf9] min-h-screen flex items-center justify-center p-6">
+<body class="min-h-screen flex items-center justify-center p-6">
 
     <div class="w-full max-w-md">
-        <div class="bg-white rounded-[3rem] shadow-2xl shadow-gray-200 border border-gray-100 p-10 relative overflow-hidden">
+        <div class="bg-white rounded-[3rem] shadow-sm border border-gray-100 p-10 lg:p-12">
             
-            <div class="absolute top-0 right-0 w-32 h-32 bg-red-50 rounded-full -mr-16 -mt-16"></div>
-
-            <div class="text-center mb-8 relative z-10">
-                <div class="size-16 bg-uacm text-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-red-900/20 transform -rotate-3">
-                    <span class="material-symbols-outlined text-3xl">person_add</span>
+            <header class="text-center mb-10">
+                <div class="inline-flex items-center justify-center size-16 bg-gray-50 rounded-2xl mb-6">
+                    <span class="material-symbols-outlined uacm-red text-3xl">person_add</span>
                 </div>
-                <h1 class="text-2xl font-black text-gray-900 tracking-tighter">Crear Cuenta</h1>
-                <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mt-2">Investigación Científica UACM</p>
-            </div>
+                <h1 class="text-2xl font-black text-gray-900 uppercase tracking-tighter">Crear Cuenta</h1>
+                <p class="text-xs font-bold text-gray-400 mt-2 uppercase tracking-widest">Portal de Investigadores</p>
+            </header>
 
             <?php if ($mensaje_error): ?>
-                <div class="bg-red-50 border border-red-100 text-red-600 text-[10px] font-black p-4 rounded-2xl mb-6 flex items-center gap-2 uppercase">
-                    <span class="material-symbols-outlined text-sm">error</span>
+                <div class="bg-red-50 border border-red-100 text-red-600 text-[10px] font-bold p-4 rounded-2xl mb-6 text-center uppercase">
                     <?php echo $mensaje_error; ?>
                 </div>
             <?php endif; ?>
 
             <form action="registro-usuario.php" method="POST" class="space-y-4">
-                <div>
-                    <input type="text" name="nombre" required 
-                        placeholder="Nombre completo" 
-                        class="w-full px-5 py-4 bg-gray-50 rounded-2xl text-sm outline-none focus:ring-2 ring-uacm border-transparent transition-all"
-                        value="<?php echo isset($_POST['nombre']) ? htmlspecialchars($_POST['nombre']) : ''; ?>">
-                </div>
+                <input type="text" name="nombre" required placeholder="Nombre Completo" 
+                    class="w-full px-5 py-4 bg-gray-50 rounded-2xl text-sm outline-none focus:ring-2 ring-uacm border-transparent transition-all">
 
-                <div>
-                    <input type="email" name="correo" required 
-                        placeholder="Correo institucional" 
-                        class="w-full px-5 py-4 bg-gray-50 rounded-2xl text-sm outline-none focus:ring-2 ring-uacm border-transparent transition-all"
-                        value="<?php echo isset($_POST['correo']) ? htmlspecialchars($_POST['correo']) : ''; ?>">
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <input type="password" name="password" required 
-                        placeholder="Contraseña" 
+                <input type="email" name="correo" required placeholder="Correo Institucional" 
+                    class="w-full px-5 py-4 bg-gray-50 rounded-2xl text-sm outline-none focus:ring-2 ring-uacm border-transparent transition-all">
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="password" name="password" required placeholder="Contraseña" 
                         class="w-full px-5 py-4 bg-gray-50 rounded-2xl text-sm outline-none focus:ring-2 ring-uacm border-transparent transition-all">
                     
-                    <input type="password" name="confirm_password" required 
-                        placeholder="Confirmar" 
+                    <input type="password" name="confirm_password" required placeholder="Confirmar" 
                         class="w-full px-5 py-4 bg-gray-50 rounded-2xl text-sm outline-none focus:ring-2 ring-uacm border-transparent transition-all">
                 </div>
 
@@ -112,6 +99,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['registrar'])) {
                 <p class="text-[10px] font-bold text-gray-400 uppercase mb-3 tracking-widest">¿Ya tienes una cuenta?</p>
                 <a href="login.php" class="text-uacm font-black text-xs uppercase tracking-widest hover:underline transition-all">
                     Inicia Sesión aquí
+                </a>
+            </div>
+
+            <div class="mt-6 text-center">
+                <a href="index.php" class="text-[9px] font-black text-gray-300 hover:text-gray-500 transition-colors uppercase tracking-[0.2em] flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-sm">arrow_back</span> Regresar al Portal
                 </a>
             </div>
         </div>
